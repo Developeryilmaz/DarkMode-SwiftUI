@@ -84,7 +84,47 @@ struct ContentView: View {
                     Text("Pick a theme")
                 }
                 .padding()
-                .background(.white, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                
+         
+                
+                
+                List {
+                    
+                    VStack {
+                        Picker("Flavor", selection: $systemTheme) {
+                            ForEach(SchemeType.allCases) { item in
+                                Text(item.title)
+                                    .tag(item.rawValue)
+                            }
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding()
+                    
+                    Picker("Theme", selection: $systemTheme) {
+                        HStack{
+                            Image("sun")
+                                .resizable()
+                                .frame(width: 5,height: 5)
+                                .padding()
+                            Spacer()
+                                .frame(width: 50)
+                            Text("  Light")
+                        }
+                        .tag(1)
+                        HStack {
+                            Image("moon")
+                                .padding(.trailing, 18)
+                            Text("  Dark")
+                        }.tag(2)
+                        HStack {
+                            Image("system")
+                                .padding(.trailing, 18)
+                            Text("  System")
+                        }
+                        .tag(0)
+                    }
+                }
                 
             }
         }
